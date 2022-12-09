@@ -1,17 +1,12 @@
 public class Solution_1 {
     public static boolean booleanExpression(boolean a, boolean b, boolean c, boolean d) {
-        int i=0;
-        if (a) i++;
-        if (b) i++;
-        if (c) i++;
-        if (d) i++;
-        return i == 2;
+        return ((a^b)&&(c^d))||((a^d)&&(c^b));
     }
     public static void main(String[] args){
-        boolean a = true;
+        boolean a = false;
         boolean b = false;
-        boolean c = true;
-        boolean d = false;
+        boolean c = false;
+        boolean d = true;
         System.out.println(booleanExpression(a,b,c,d));
     }
 }
