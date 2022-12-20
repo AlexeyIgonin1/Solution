@@ -1,3 +1,5 @@
+package Unit_2;
+
 public class Solution_4 {
     public static int flipBit(int value, int bitIndex) {
         return value^(1<<(bitIndex-1));

@@ -1,3 +1,5 @@
+package Unit_2;
+
 public class Solution_3 {
     public static boolean doubleExpression(double a, double b, double c) {
         return Math.abs(a + b - c) < 0.0001;

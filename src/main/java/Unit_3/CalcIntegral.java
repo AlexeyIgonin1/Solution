@@ -1,8 +1,10 @@
+package Unit_3;
+
 import java.util.function.DoubleUnaryOperator;
 
 
 
-public class CalcIntegral {
+public class CalcIntegral{
     //метод левых прямоугольников
 
     public static void main(String[] args) {
@@ -15,25 +17,32 @@ public class CalcIntegral {
     }
     public static double integrate(DoubleUnaryOperator f, double a, double b) {
 
-      /*  double hag = 10e-7;
+/*
+        double hagi = 10e-7;
+        double sum=0;
+        while (a<=b){
+            a = Math.abs(a+hagi);
+            sum+=hagi*f.applyAsDouble(a);
+        }
+          return sum;
+       */
+
+      /*
+      double hag = 10e-7;
         double rez = 0;
         while (a<=b){
             a = Math.abs(a+hag);
-            rez = a*f.applyAsDouble(a);
+            double y = f.applyAsDouble(a);
+            rez += y;
         }
-        return rez;*/
+        return rez*hag;
+        */
 
-        double n = 10000000;
-        double h = Math.abs(a-b/n);
+        double h = 10e-7;
         double res = 0;
-
-        for(double i =0; i<n; i++){
-            res = f.applyAsDouble(a + h*i);
+        for(double i =a; i<=b; i+=h){
+            res += h*f.applyAsDouble(i);
         }
-
-
         return res;
     }
-
-
 }

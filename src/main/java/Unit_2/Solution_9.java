@@ -1,5 +1,7 @@
-import java.util.Arrays;
+package Unit_2;
 
+import java.util.Arrays;
+//"сортировка слиянием"
 public class Solution_9 {
     public static int[] mergeArrays(int[] array1, int[] array2) {
         int[] array3 = new int[array1.length + array2.length];

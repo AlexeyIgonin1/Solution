@@ -1,9 +1,10 @@
+package Unit_2;
+
 public class Solution_5 {
     public static char charExpression(int a) {
         char value = '\\';
-        int newvalue = value + a;
-
-        return (char)newvalue;
+        int new_value = value + a;
+        return (char)new_value;
     }
     public static void main(String[] args) {
         int a = 28;
