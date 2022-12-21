@@ -3,25 +3,24 @@ package Unit_3;
 public class Main {
 
     public static void main(String[] args) {
-        String[] spamKeywords = {"bad","spam"}; // Слова, относящиеся к спаму
-        int commentMaxLength = 40; // Максимальная длина строки
-        String s = "This spam"; // Тестируемая строка
+        NegativeTextAnalyzer a = new NegativeTextAnalyzer();
+        SpamAnalyzer s = new SpamAnalyzer(new String[]{"купить", "продать"});
+        TooLongTextAnalyzer l = new TooLongTextAnalyzer(15);
 
-        TextAnalyzer[] textAnalyzers = { // Массив, подаваемый на вход checkLabels()
-                new SpamAnalyzer(spamKeywords),
-                new NegativeTextAnalyzer(),
-                new TooLongTextAnalyzer(commentMaxLength)
-        };
+        TextAnalyzer[] T = {a, s, l};
+        System.out.println(checkLabels(T, "Эта строка не пройдёт проверку на длину в 3-м по счету анализаторе"));
+        System.out.println(checkLabels(T, "Реклама. Предлагаем купить квартиру! (2-й анализатор ругнётся)"));
+        System.out.println(checkLabels(T, "Не грусти :(, мышкой похрусти! (1-й)"));
+        System.out.println(checkLabels(T, "Здесь всё ОК"));
 
-        System.out.println(checkLabels(textAnalyzers, s)); // На выходе SPAM, так как String s содержит ключевое слово "spam" из spamKeywords
+        //Программа должна вывести:
+        //TOO_LONG
+        //SPAM
+        //NEGATIVE_TEXT
+        //OK
 
 
-
-
-
-
-
-        /*
+       /*
         // инициализация анализаторов для проверки в порядке данного набора анализаторов
         String[] spamKeywords = {"spam", "bad"};
         int commentMaxLength = 40;
@@ -80,8 +79,8 @@ public class Main {
                 numberOfAnalyzer++;
             }
             numberOfTest++;
-        }
-*/
+        }*/
+
     }
 //--------------------------------------------------------------------------------------------------------------
     enum Label {
@@ -97,8 +96,8 @@ public class Main {
        protected abstract Label getLabel();
 
        public Label processText(String text){
-           String[] keywords = getKeywords();
-           for(String keyword : keywords) {
+          // String[] keywords = getKeywords();
+           for(String keyword : getKeywords()) {
                if (keyword.contains(text)) {
                    return getLabel();
                }
@@ -107,7 +106,7 @@ public class Main {
        }
     }
 //-------------------------------------------------------------------------------------------------------------
-    static class TooLongTextAnalyzer implements TextAnalyzer{
+       static class TooLongTextAnalyzer implements TextAnalyzer{
         private int maxLength;
 
         public TooLongTextAnalyzer(int maxLength) {
@@ -118,7 +117,7 @@ public class Main {
         }
         @Override
         public Label processText(String text) {
-            if(text.length()>maxLength){
+            if(text.length()<maxLength){
                 return Label.TOO_LONG;
             }
             else{
@@ -127,11 +126,11 @@ public class Main {
         }
     }
 //-----------------------------------------------------------------------------------------------------
-    static class NegativeTextAnalyzer extends KeywordAnalyzer{
+     static class NegativeTextAnalyzer extends KeywordAnalyzer implements TextAnalyzer{
         private final String[] KEYWORDS = {":(", "=(", ":|"};
         @Override
         protected String[] getKeywords() {
-            return KEYWORDS;
+            return this.KEYWORDS;
         }
         @Override
         protected Label getLabel() {
@@ -139,7 +138,7 @@ public class Main {
     }
 }
 //------------------------------------------------------------------------------------------
-    static class SpamAnalyzer extends KeywordAnalyzer {
+    static class SpamAnalyzer extends KeywordAnalyzer implements TextAnalyzer{
        private String[] keywords;
 
         public SpamAnalyzer(String[] keywords) {
@@ -147,7 +146,7 @@ public class Main {
         }
 
         public String[] getKeywords() {
-            return keywords;
+            return this.keywords;
         }
 
         @Override
@@ -157,7 +156,7 @@ public class Main {
 
 }
 //--------------------------------------------------------------------------------------------------------
-    public static Label checkLabels(TextAnalyzer[] analyzers, String text) {
+    public static  Label checkLabels(TextAnalyzer[] analyzers, String text) {
 
         for(int i = 0; i < analyzers.length; i++){
             if(analyzers[i].processText(text)!=Label.OK){
