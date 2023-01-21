@@ -3,15 +3,17 @@ package additional_task;
 
 public class Array {
     public static void printOddNumbers(int[] array){
-        String s = "";
+       String s = "";
         for(int a = 0; a < array.length; a++){
             if (array[a]%2==0) {
                 continue;
             }
             else{
+
                 System.out.print(s);
                 System.out.print(array[a]);
-                s = ",";
+                s = ":";
+
             }
         }
     }

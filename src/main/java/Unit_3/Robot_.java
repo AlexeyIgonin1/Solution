@@ -24,6 +24,7 @@ public class Robot_ {
             this.dir = dir;
         }
 
+
         public Direction getDirection() {return dir;}
 
         public int getX() {return x;}

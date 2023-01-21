@@ -98,7 +98,7 @@ public class Main {
        public Label processText(String text){
           // String[] keywords = getKeywords();
            for(String keyword : getKeywords()) {
-               if (keyword.contains(text)) {
+               if (text.contains(keyword)) {
                    return getLabel();
                }
            }
