@@ -1,4 +1,4 @@
-package exceptions;
+package Unit_4;
 
 public class Сhecked_exception {
     public static void main(String[] args) {
