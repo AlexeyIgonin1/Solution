@@ -1,7 +1,7 @@
 import java.util.Arrays;
 
 
-public class DynamicArray {
+public class Dynamic_sArray {
     public static void main(String[] args) {
         DynamicArray<Integer> dynamicArray = new DynamicArray<>();
 

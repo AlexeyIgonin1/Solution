@@ -1,3 +1,5 @@
+package Unit6;
+
 public class ParametraizesClass {
     public static void main(String[] args) {
         Info<String> info1 = new Info<>("privet");
